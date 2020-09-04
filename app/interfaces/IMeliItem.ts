@@ -6,7 +6,14 @@ export interface IMeliItem{
             amount: Number,
             decimals: Number
         },
-        picture: String,
         condition: String,
-        free_shipping: Boolean       
+        free_shipping: Boolean,
+        address?:{
+            state: String,
+            city: String
+        },
+        picture?: String,
+        sold_quantity?: Number,
+        description?: String,       
+        category_id?: String       
 }

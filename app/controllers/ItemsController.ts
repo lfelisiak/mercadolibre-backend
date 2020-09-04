@@ -25,17 +25,22 @@ export class ItemsController{
             return {code:error.code || null,message:error.message || null};
         }
     }
-/*
+
     async get(request: Request, response: Response) {
         try{
-            const transaction = this.financialAccountHistory.find(transaction => transaction.id === parseInt(request.params.id))
-            const result = {code:200,status:true,data:{financialTransaction:transaction}};
-            return result;
+            console.log(request.params.id);
+            if(!request.params.id){
+                throw new Error("Missing Parameter: id");
+            }
+            const id:string = request.params.id;
+            const service = new MeliService();
+            const res = await service.getItem(id);
+            return MeliResponseMapper(res);
         }catch(error){
             console.log(error);
             return {code:error.code || 500,status:false,message:error.message || null};
         }
     }
 
-    */
+    
 }
