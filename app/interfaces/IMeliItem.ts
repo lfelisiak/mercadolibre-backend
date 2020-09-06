@@ -15,5 +15,6 @@ export interface IMeliItem{
         picture?: String,
         sold_quantity?: Number,
         description?: String,       
-        category_id?: String       
+        category_id?: String,       
+        permalink?: String,       
 }

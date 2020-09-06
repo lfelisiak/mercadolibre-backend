@@ -8,7 +8,7 @@ export class ItemsController{
 
     async index(request: Request, response: Response) {
         try{
-            //for limit offset pagination
+            //para limit offset pagination
             let options:Object;
             options = {
                 ...(request.query.take ?  {take: request.query.take} : {}),
@@ -19,16 +19,14 @@ export class ItemsController{
             
             const {items,categories} = await service.getItems(request.query.search,options);
             return MeliResponseMapper({items,categories});
-            return {items,categories};
         }catch(error){
-            console.log(error);
-            return {code:error.code || null,message:error.message || null};
+            console.log(error.message);
+            return {code:error.code || 500,message:error.message || null};
         }
     }
 
     async get(request: Request, response: Response) {
         try{
-            console.log(request.params.id);
             if(!request.params.id){
                 throw new Error("Missing Parameter: id");
             }
@@ -37,8 +35,8 @@ export class ItemsController{
             const res = await service.getItem(id);
             return MeliResponseMapper(res);
         }catch(error){
-            console.log(error);
-            return {code:error.code || 500,status:false,message:error.message || null};
+            return (error.response.data) ? {status:false,code:error.response.status,message:"Resource Not Found"} : 
+            {code:error.code || 500,status:false,message:error.message || null}
         }
     }
 

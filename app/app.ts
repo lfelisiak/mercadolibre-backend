@@ -29,7 +29,6 @@ class App {
           const result = (new (route.controller as any))[route.action](req, res, next);
           if (result instanceof Promise) {
               result.then( (result) => {
-                console.info(result);
                 if(result !== null && result !== undefined )
                    return res.json(result) 
                 else 
